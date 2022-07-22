@@ -1,0 +1,14 @@
+.fondoMain{
+    padding: 0 4em;
+    padding-top: 2em;
+    background-color: #ededed;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.filtrosContainer{
+    width: 35%;
+    margin-right: 3em;
+}

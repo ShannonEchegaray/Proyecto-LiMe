@@ -1,0 +1,21 @@
+.itemContainer{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    outline: 1px solid #80808038;
+    height: 12em;
+}
+
+.itemImage{
+    margin: 0 2em;
+    width: 25%;
+    height: 90%;
+    border: solid black 1px;
+}
+
+.itemText{
+    display: flex;
+    flex-flow: column nowrap;
+}
