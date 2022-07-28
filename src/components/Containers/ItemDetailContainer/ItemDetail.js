@@ -1,21 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
+import ItemCount from './ItemCount';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import "./ItemDetailContainer.css"
-import ItemCount from '../ItemCount';
+import "./ItemDetail.css"
 
-const ItemDetailContainer = () => {
+const ItemDetail = () => {
+
+  const [producto, setProducto] = useState({})
+
+
+    const addProduct = (counter) => {
+        counter > 20 ? setProducto(counter) : console.log("no se banca el stock")
+      }
+
   return (
-    <div>
-      <div className="fondoMain">
-        <div className="cardItem">
-          <div className='containerItem'>
-            
-          </div>
-          <div className='containerDetailItem'>
-            <div className='containerDescriptionItem'>
+    <div className='containerDetailItem'>
+            <div className='containerDescriptionItem sticky top-2.5'>
               <p className='newParagraph'>Nuevo | n comprados</p>
               <p className='titleParagraph'>Item tal, descripcion otra tal</p>
               <div className='titleParagraph' style={{display: "flex", flexWrap: "nowrap", alignItems: "center"}}>
@@ -45,15 +47,12 @@ const ItemDetailContainer = () => {
                   Color: <span style={{fontWeight: "500"}}>Azul</span>
                 </div>
                 <div style={{paddingTop: "20px"}}>
-                  <ItemCount stock={20} initial={1}/>
+                  <ItemCount addProducto={addProduct} stock={20} initial={1}/>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
   )
 }
 
-export default ItemDetailContainer
+export default ItemDetail

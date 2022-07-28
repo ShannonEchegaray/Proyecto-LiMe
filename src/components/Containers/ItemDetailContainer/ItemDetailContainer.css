@@ -1,0 +1,14 @@
+.cardItem{
+    width: 95%;
+    height: 110vh;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px;
+    background-color: white;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.containerItem{
+    flex-grow: 1;
+}
+

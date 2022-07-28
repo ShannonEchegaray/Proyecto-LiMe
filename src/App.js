@@ -1,9 +1,9 @@
-import './App.css';
 import ItemListContainer from './components/Containers/ItemListContainer';
 import NavBar from './components/NavBar/NavBar';
 import {Routes, Route, BrowserRouter} from "react-router-dom"
 import Cart from './components/Cart';
-import ItemDetailContainer from './components/Containers/ItemDetailContainer';
+import './App.css';
+import ItemDetailContainer from './components/Containers/ItemDetailContainer/ItemDetailContainer';
 
 function App() {
   return (
@@ -22,3 +22,4 @@ function App() {
 }
 
 export default App;
+

@@ -1,0 +1,36 @@
+.listaCantidades{
+    background-color: white;
+    list-style-type: none;
+    width: 12em;
+    box-shadow: 0 0 10px 0 #80808043;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.itemList{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 7px;
+    transition: 0.1s;
+}
+
+.itemList:hover{
+    background-color: #e9e9e9;
+}
+
+.quantityButton{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    text-align: start;
+}
+
+.selectQuantity{
+    padding-right: 54px;
+    outline: solid 2px #6060ff;
+    border-radius: 5px;
+}
+
+.selectQuantity:focus{
+    outline: solid 2px #3a3aff;
+}
