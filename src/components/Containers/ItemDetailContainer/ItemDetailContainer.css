@@ -7,8 +7,3 @@
     display: flex;
     flex-flow: row nowrap;
 }
-
-.containerItem{
-    flex-grow: 1;
-}
-

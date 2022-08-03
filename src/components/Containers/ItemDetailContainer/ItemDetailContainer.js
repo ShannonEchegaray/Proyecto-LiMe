@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import "./ItemDetailContainer.css"
 import ItemDetail from "./ItemDetail"
+import ItemView from './ItemView'
 
 const ItemDetailContainer = () => {
 
@@ -9,9 +10,7 @@ const ItemDetailContainer = () => {
     <div>
       <div className="fondoMain">
         <div className="cardItem">
-          <div className='containerItem'>
-            
-          </div>
+          <ItemView />
           <ItemDetail />
         </div>
       </div>
