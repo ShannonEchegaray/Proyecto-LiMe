@@ -6,9 +6,10 @@ import StarHalfIcon from '@mui/icons-material/StarHalf';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import "./ItemDetail.css"
 
-const ItemDetail = () => {
 
-  const [producto, setProducto] = useState({})
+const ItemDetail = ({item}) => {
+
+  const [producto, setProducto] = useState({item})
 
 
     const addProduct = (counter) => {
@@ -19,7 +20,7 @@ const ItemDetail = () => {
     <div className='containerDetailItem'>
             <div className='containerDescriptionItem sticky top-2.5'>
               <p className='newParagraph'>Nuevo | n comprados</p>
-              <p className='titleParagraph'>Item tal, descripcion otra tal</p>
+              <p className='titleParagraph'>{item.title}</p>
               <div className='titleParagraph' style={{display: "flex", flexWrap: "nowrap", alignItems: "center"}}>
                 <StarIcon sx={{ fontSize: 18 }} color="primary"/>
                 <StarIcon sx={{ fontSize: 18 }} color="primary"/>
@@ -29,8 +30,8 @@ const ItemDetail = () => {
                 <span style={{fontSize:"18px", verticalAlign: "middle"}}>(n)</span>
               </div>
               <div>
-                <p className='priceParagraph'>$ X.XXX</p>
-                <p>en 12 x $XXX</p>
+                <p className='priceParagraph'>$ {item.price}</p>
+                <p>en 12 x ${item.price / 12}</p>
               </div>
               <p className='payMethods'>ver los medios de pago</p>
 
@@ -47,7 +48,7 @@ const ItemDetail = () => {
                   Color: <span style={{fontWeight: "500"}}>Azul</span>
                 </div>
                 <div style={{paddingTop: "20px"}}>
-                  <ItemCount addProducto={addProduct} stock={20} initial={1}/>
+                  <ItemCount addProducto={addProduct} stock={producto.qty} initial={1}/>
                 </div>
               </div>
             </div>
