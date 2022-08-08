@@ -1,13 +1,19 @@
-import React, {createContext, useState} from 'react'
+import React, {createContext, useState, useEffect} from 'react'
 
 export const cartContext = createContext()
 const {Provider} = cartContext
 
 const CartContext = ({children}) => {
 
-  const [items, setItems] = useState({})
+  const [items, setItems] = useState([])
+  const [fPrice, setFPrice] = useState(0)
+
+  useEffect(() => {
+    setFPrice(items.reduce((acc, el) => acc + el.qty * el.price, 0))
+  }, [items])
+  console.log(fPrice)
   
-  const agregarItem = (item) => {
+  const addCart = (item) => {
     let {id, qty, stock} = item;
     if(estaEnLista(id)){
       let cart = [...items]
@@ -18,6 +24,14 @@ const CartContext = ({children}) => {
     } else {
       setItems([...items, item])
     }
+  }
+
+  const setQty = (id, qty) => {
+    let cart = [...items]
+    let cartItem = cart.find(el => el.id === id);
+    cartItem.qty = qty;
+    cart[cart.indexOf(cartItem)] = cartItem;
+    setItems(cart)
   }
 
   const removerItem = (itemId) => {
@@ -41,7 +55,7 @@ const CartContext = ({children}) => {
   }
 
   return (
-    <Provider value={{items}}>
+    <Provider value={{items, fPrice, setQty, addCart}}>
       {children}
     </Provider>
   )

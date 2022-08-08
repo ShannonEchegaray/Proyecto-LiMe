@@ -10,7 +10,7 @@
 .itemList{
     box-sizing: border-box;
     width: 100%;
-    padding: 10px 7px;
+    padding: 5px 7px;
     transition: 0.1s;
 }
 

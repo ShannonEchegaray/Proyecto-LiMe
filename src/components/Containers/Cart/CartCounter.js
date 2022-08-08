@@ -1,15 +1,20 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
-const CartCounter = ({stock}) => {
+const CartCounter = ({stock, initial, addProduct}) => {
 
-    const [counter, setCounter] = useState(0)
+    const [counter, setCounter] = useState(initial)
+
+    useEffect(() => {
+      addProduct(counter)
+    }, [counter])
+        
 
     const addCounter = () => {
-        setCounter(counter + 1)
+        counter >= stock ? console.log("La cantidad no puede superar al stock") : setCounter(counter + 1)
     }
 
     const substractCounter = () => {
-        setCounter(counter - 1)
+        counter <= 1 ? console.log("Error, no podes tener cantidad 0 o negativo") : setCounter(counter - 1);
     }
   return (
     <div>

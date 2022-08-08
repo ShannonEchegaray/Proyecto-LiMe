@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import {cartContext} from "../Cart/context/CartContext"
 import ItemCount from './ItemCount';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -9,11 +10,11 @@ import "./ItemDetail.css"
 
 const ItemDetail = ({item}) => {
 
-  const [producto, setProducto] = useState({item})
-
+  const {addCart} = useContext(cartContext)
 
     const addProduct = (counter) => {
-        counter > 20 ? setProducto(counter) : console.log("no se banca el stock")
+      console.log(counter)
+        counter < item.stock ? addCart({...item, qty: counter}) : console.log("no se banca el stock")
       }
 
   return (
@@ -48,7 +49,7 @@ const ItemDetail = ({item}) => {
                   Color: <span style={{fontWeight: "500"}}>Azul</span>
                 </div>
                 <div style={{paddingTop: "20px"}}>
-                  <ItemCount addProducto={addProduct} stock={producto.qty} initial={1}/>
+                  <ItemCount addProducto={addProduct} stock={item.stock} initial={1}/>
                 </div>
               </div>
             </div>

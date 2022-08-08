@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import "./ItemCount.css"
 
 const ItemCount = ({stock, initial, addProducto}) => {
-    const [selection, setSelection] = useState(1);
+    const [selection, setSelection] = useState(initial);
     const [input, setInput] = useState("")
     const [boton, setBoton] = useState(false)
     const [boton2, setBoton2] = useState(false)
+
+    console.log(stock)
 
     const select = (number) => {
         setSelection(number);

@@ -1,23 +1,22 @@
 import React, { useEffect, useContext } from 'react'
-import {cartContext} from '../ItemDetailContainer/context/CartContext'
+import {cartContext} from './context/CartContext'
 import CartItem from './CartItem'
 
 const CartContainer = () => {
 
-    const {first} = useContext(cartContext)
+    const {items, fPrice} = useContext(cartContext)
 
     useEffect(() => {
-      console.log(first)
+      console.log(items)
     
     }, [])
-    
 
   return (
     <div>
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
+      {items.map(el => <CartItem key={el.id} item={el}/>)}
+      <div className='border-y border-grey border-solid'>
+        <p className="text-end">Total con envio $ {fPrice}</p>
+      </div>
     </div>
   )
 }

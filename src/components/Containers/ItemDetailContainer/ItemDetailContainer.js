@@ -10,17 +10,19 @@ const ItemDetailContainer = () => {
 
   const {id} = useParams()
 
-  const [product, setProducts] = useState([])
+  const [product, setProduct] = useState({})
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     setTimeout(() => {
 
       setLoading(true);
-      setProducts(data.filter(el => el.id == id));
+      setProduct(data.find(el => el.id == id));
       setLoading(false);
     }, 2000)  
   }, [])
+
+  console.log(id)
 
   return (
       <div className="fondoMain">
