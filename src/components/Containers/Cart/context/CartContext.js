@@ -7,9 +7,11 @@ const CartContext = ({children}) => {
 
   const [items, setItems] = useState([])
   const [fPrice, setFPrice] = useState(0)
+  const [nop, setNop] = useState(0)
 
   useEffect(() => {
-    setFPrice(items.reduce((acc, el) => acc + el.qty * el.price, 0))
+    setFPrice(calcularTotal())
+    setNop(articulosObtenidos())
   }, [items])
   console.log(fPrice)
   
@@ -35,27 +37,48 @@ const CartContext = ({children}) => {
   }
 
   const removerItem = (itemId) => {
-    setItems([...items].filter(el => el.id != itemId))
+    setItems(items.filter(el => el.id != itemId))
   }
 
   const limpiar = () => {
     setItems([])
   }
 
+  const changeStatus = (id) => {
+    let cart = [...items]
+    let cartItem = cart.find(el => el.id === id);
+    cartItem.status = cartItem.status === "CARRITO" ? "GUARDADOS" : "CARRITO"
+    cartItem.qty = cartItem.status === "GUARDADOS" && 0;
+    cart[cart.indexOf(cartItem)] = cartItem;
+    setItems(cart)
+  }
+
+  // Funciones internas
   const calcularTotal = () => {
-    return items.reduce((acc, el) => acc + (el.qty * el.price), 0)
+    return items.reduce((acc, el) => el.status === "CARRITO" ? acc + el.qty * el.price : acc, 0)
   }
 
   const articulosObtenidos = () => {
-    return items.reduce((acc, el) => acc + el.qty, 0);
+    return items.reduce((acc, el) => el.status === "CARRITO" ? acc + el.qty : acc, 0);
   }
 
   const estaEnLista = (id) => {
     return items.some(el => el.id == id)
   }
 
+  const values = {
+    items,
+    fPrice,
+    nop,
+    addCart,
+    setQty,
+    removerItem,
+    limpiar,
+    changeStatus
+  }
+
   return (
-    <Provider value={{items, fPrice, setQty, addCart}}>
+    <Provider value={{...values}}>
       {children}
     </Provider>
   )

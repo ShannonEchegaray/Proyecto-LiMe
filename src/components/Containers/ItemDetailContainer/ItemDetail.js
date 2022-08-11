@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useContext} from 'react'
 import {cartContext} from "../Cart/context/CartContext"
 import ItemCount from './ItemCount';
 import StarIcon from '@mui/icons-material/Star';
@@ -14,12 +14,12 @@ const ItemDetail = ({item}) => {
 
     const addProduct = (counter) => {
       console.log(counter)
-        counter < item.stock ? addCart({...item, qty: counter}) : console.log("no se banca el stock")
+        counter < item.stock ? addCart({...item, qty: counter, status: "CARRITO"}) : console.log("no se banca el stock")
       }
 
   return (
     <div className='containerDetailItem'>
-            <div className='containerDescriptionItem sticky top-2.5'>
+            <div className='containerDescriptionItem'>
               <p className='newParagraph'>Nuevo | n comprados</p>
               <p className='titleParagraph'>{item.title}</p>
               <div className='titleParagraph' style={{display: "flex", flexWrap: "nowrap", alignItems: "center"}}>

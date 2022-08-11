@@ -1,9 +1,11 @@
 .containerDetailItem{
-    width: 368px;
+    min-width: 368px;
     position: relative;
 }
 
 .containerDescriptionItem{
+    position: sticky;
+    top: -36px;
     margin: 10px 10px 10px 5px;
     border: 1px solid gainsboro;
     border-radius: 5px;

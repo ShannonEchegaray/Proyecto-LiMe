@@ -1,4 +1,5 @@
 .fondoMain{
+    min-height: 90vh;
     padding: 0 4em;
     padding-top: 2em;
     background-color: #ededed;
