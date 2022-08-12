@@ -5,6 +5,14 @@ import { Link } from 'react-router-dom';
 import { GoLocation } from "react-icons/go";
 
 const NavBar = () => {
+
+    const categories = [
+        {categoria: "electronics"},
+        {categoria: "women's clothing"},
+        {categoria: "jewelery"},
+        {categoria: "men's clothing"}
+    ]
+
   return (
     <header id="pepe">
         <div>
@@ -34,7 +42,11 @@ const NavBar = () => {
             <nav className='navegacion'>
                 <ul className='listah'>
                     <li>Ofertas</li>
-                    <li>Categorias</li>
+                    <li className='categorias'>Categorias
+                        <ul className='bg-black rounded overflow-hidden m-0 p-0'>
+                        {categories.map(el => <li className='bg-gray-800 px-2 py-1.5 hover:bg-gray-500'><Link className='text-white' to={`/${el.categoria}`}>{el.categoria}</Link></li>)}
+                        </ul>
+                    </li>
                 </ul>
 
                 <ul className='listah'>

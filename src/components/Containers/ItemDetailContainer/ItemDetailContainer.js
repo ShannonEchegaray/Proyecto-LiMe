@@ -5,6 +5,7 @@ import ItemDetail from "./ItemDetail"
 import { SpinnerCircular } from 'spinners-react';
 import ItemView from './ItemView'
 import {data} from "../../../api/productos"
+import {getItem} from "../../../api/firebase"
 
 const ItemDetailContainer = () => {
 
@@ -17,13 +18,11 @@ const ItemDetailContainer = () => {
     setTimeout(() => {
 
       setLoading(true);
-      setProduct(data.find(el => el.id == id));
+      getItem(id).then(el => setProduct(el));
       setLoading(false);
     }, 2000)  
   }, [])
-
-  console.log(id)
-
+  
   return (
       <div className="fondoMain">
         {

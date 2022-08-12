@@ -1,18 +1,24 @@
 import React, { useState } from 'react'
 import "./ItemCount.css"
 
-const ItemCount = ({stock, initial, addProducto}) => {
+const ItemCount = ({stock, initial, addProducto, buyItem}) => {
     const [selection, setSelection] = useState(initial);
     const [input, setInput] = useState("")
     const [boton, setBoton] = useState(false)
     const [boton2, setBoton2] = useState(false)
+    const [error, setError] = useState(false)
 
-    console.log(stock)
+    console.log(error)
 
     const select = (number) => {
+        if(number > stock){
+            setError(true)
+            return;
+        }
         setSelection(number);
         setBoton(false)
         setBoton2(null)
+        setError(false)
         setInput("")
     }
 
@@ -32,7 +38,7 @@ const ItemCount = ({stock, initial, addProducto}) => {
                         return null
                     } else {
                         return <li key={index}>{boton2 
-                            ? (<form className="w-full p-2 border-l-2 border-solid border-blue-400">
+                            ? (<form className="w-full p-2 border-l-2 border-solid border-blue-400" onSubmit={e => e.preventDefault()}>
                                 <label className='w-9/12 text-xs' htmlFor="cantidad">Cantidad:</label>
                                 
                                 <div className='w-full relative'>
@@ -41,6 +47,7 @@ const ItemCount = ({stock, initial, addProducto}) => {
                                         }} type="text" pattern="[0-9]+" />
                                     <button className='bg-blue-600 text-white absolute right-1 inset-y-1 rounded text-sm p-0.5' onClick={() => select(input)}>Aplicar</button>
                                 </div>
+                                {error && <p className='text-xs text-red-800'>*La cantidad no puede superar el stock</p>}
                                 
                                 </form> )
                             : <button className='itemList text-left' disabled={input.length == 0 ? false : true} onClick={(e) => {newButton(e)}}>Comprar mas de {index} unidades</button>}</li>
@@ -50,7 +57,7 @@ const ItemCount = ({stock, initial, addProducto}) => {
             <div className='mt-3 flex flex-col justify-content-center'>
                 <button
                  className="w-10/12 my-1 font-medium py-1.5 block text-center text-white rounded bg-blue-600"
-                 onClick={() => addProducto(selection)}
+                 onClick={() => buyItem(selection)}
                 >Comprar</button>
                 <button 
                  className="w-10/12 my-1 font-medium py-1.5 block text-center rounded bg-blue-100 text-blue-600"

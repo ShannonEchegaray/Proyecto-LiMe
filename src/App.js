@@ -5,8 +5,10 @@ import Cart from './components/Containers/Cart/Cart';
 import './App.css';
 import ItemDetailContainer from './components/Containers/ItemDetailContainer/ItemDetailContainer';
 import CartContext from './components/Containers/Cart/context/CartContext';
+import Form from "./components/Form"
 
 function App() {
+
   return (
     <div className="App">
       <CartContext>
@@ -17,6 +19,8 @@ function App() {
             <Route path='/:category' element={<ItemListContainer />} />   
             <Route path='/category/:id' element={<ItemDetailContainer />} />
             <Route path='/cart/*' element={<Cart />} />
+            <Route path="/form" element={<Form />}/>
+            <Route path="/form/:id" element={<Form />}/>
           </Routes>
         </BrowserRouter>
       </CartContext>

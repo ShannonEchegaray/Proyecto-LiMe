@@ -1,20 +1,24 @@
 import React, {useState, useEffect} from 'react';
+import {useParams} from "react-router-dom"
 import {data}  from "../../api/productos"
 import { SpinnerCircular } from 'spinners-react';
 import ItemList from "../ItemList";
 import "./ItemListContainer.css"
+import {getCategory, getItems} from "../../api/firebase"
 
 const ItemListContainer = ({greetings}) => {
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
 
+  const {category} = useParams()
+
   useEffect(() => {
-    setTimeout(() => {
-      setProducts(data);
-      setLoading(false);
-    }, 2000)  
-  }, [])
+    setLoading(true);
+    const result = category ? getCategory(category) : getItems()
+    result.then(data => setProducts(data));
+    setLoading(false);
+  }, [category])
   
 
   return (

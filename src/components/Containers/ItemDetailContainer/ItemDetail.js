@@ -1,4 +1,5 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
+import {Navigate} from "react-router-dom"
 import {cartContext} from "../Cart/context/CartContext"
 import ItemCount from './ItemCount';
 import StarIcon from '@mui/icons-material/Star';
@@ -10,12 +11,18 @@ import "./ItemDetail.css"
 
 const ItemDetail = ({item}) => {
 
-  const {addCart} = useContext(cartContext)
+  const {addCart, buyIndividualItem} = useContext(cartContext)
+  const [redirect, setRedirect] = useState(null)
 
+  
     const addProduct = (counter) => {
-      console.log(counter)
-        counter < item.stock ? addCart({...item, qty: counter, status: "CARRITO"}) : console.log("no se banca el stock")
+        counter <= item.stock ? addCart({...item, qty: counter, status: "CARRITO"}) : console.log("no se banca el stock")
       }
+
+    const buyItem = (counter) => {
+      buyIndividualItem({...item, qty: counter})
+      setRedirect({...item, qty: counter})
+    }
 
   return (
     <div className='containerDetailItem'>
@@ -49,7 +56,8 @@ const ItemDetail = ({item}) => {
                   Color: <span style={{fontWeight: "500"}}>Azul</span>
                 </div>
                 <div style={{paddingTop: "20px"}}>
-                  <ItemCount addProducto={addProduct} stock={item.stock} initial={1}/>
+                  <ItemCount addProducto={addProduct} buyItem={buyItem} stock={item.stock} initial={1}/>
+                  {redirect && <Navigate to={`/form/${redirect.id}`}/>}
                 </div>
               </div>
             </div>

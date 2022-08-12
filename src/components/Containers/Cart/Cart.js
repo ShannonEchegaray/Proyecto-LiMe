@@ -8,15 +8,17 @@ import WishlistContainer from "./WishlistContainer"
 
 const Cart = () => {
 
-  const {nop} = useContext(cartContext)
+  const {nop, nos} = useContext(cartContext)
 
+  console.log(window.location.href)
+  window.location.href = "localhost:3000/"
   return (
   <div className="fondoMain">
     <div className="cartContainer">
       
       <ul className='border-b border-solid border-gray w-100 h-auto flex justify-start'>
         <li className='px-4 pb-2'><Link to="/cart">Carrito ({nop})</Link></li>
-        <li className='px-4 pb-2'><Link to="/cart/saved">Guardados (x)</Link></li>
+        <li className='px-4 pb-2'><Link to="/cart/saved">Guardados ({nos})</Link></li>
       </ul>
       <Routes>
         <Route path='/' element={<CartContainer />} />

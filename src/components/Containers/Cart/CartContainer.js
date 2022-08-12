@@ -17,8 +17,8 @@ const CartContainer = () => {
       {items.map(el => el.status === "CARRITO" && <CartItem key={el.id} item={el}/>)}
       {fPrice !== 0 
       ? (
-      <div className='border-y border-grey border-solid flex flex-col items-end'>
-        <p className="font-medium">Total con envio     ${fPrice}</p>
+      <div className='py-5 border-y border-grey border-solid flex flex-col items-end'>
+        <p className=" my-2 font-medium">Total con envio     ${fPrice}</p>
         <button className='text-sm text-white rounded bg-blue-500 p-2'>Continuar compra</button>
       </div>
       )
