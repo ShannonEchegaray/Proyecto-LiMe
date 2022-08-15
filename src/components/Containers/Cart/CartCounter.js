@@ -6,6 +6,7 @@ const CartCounter = ({stock, initial, addProduct}) => {
 
     useEffect(() => {
       addProduct(counter)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [counter])
         
 
