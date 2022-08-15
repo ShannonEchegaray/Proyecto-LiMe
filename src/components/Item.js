@@ -9,7 +9,7 @@ const Item = ({item}) => {
   const {isInSavedCart, addSavedCart, removeSavedCart} = useContext(cartContext)
 
   return (
-      <div className='itemContainer'>
+      <div className='itemContainer flex-start'>
         <div className='corazon' onClick={() => isInSavedCart(item.id) ? removeSavedCart(item.id) : addSavedCart(item)}>
           <FavoriteIcon sx={ isInSavedCart(item.id) ? {color : "red"} : {color : "whitesmoke"} } />
         </div>

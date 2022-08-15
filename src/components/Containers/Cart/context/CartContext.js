@@ -16,11 +16,13 @@ const CartContext = ({children}) => {
     setFPrice(calcularTotal())
     setNop(articulosObtenidos())
     localStorage.setItem("items", JSON.stringify(items))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items])
 
   useEffect(() => {
     setNos(articulosGuardados())
     localStorage.setItem("savedItems", JSON.stringify(savedItems))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedItems])
 
   //Wishlist Function's

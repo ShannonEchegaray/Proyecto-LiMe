@@ -18,6 +18,7 @@ const Form = () => {
 
     useEffect(() => {
         authId && getData().then(datos => setFormHandler({firstname: datos.nombre, lastname: datos.apellido, email: datos.email}))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
 

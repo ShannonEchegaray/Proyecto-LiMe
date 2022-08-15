@@ -55,7 +55,7 @@ export const addPurchase = async (objectCompra) => {
 const saveUserInDB = async (user, firstname, lastname) => {
     const usersCollection = collection(db, "users")
     console.log(user)
-    const datos = await addDoc(usersCollection, {id: user.uid, email: user.email, nombre: firstname, apellido: lastname})
+    await addDoc(usersCollection, {id: user.uid, email: user.email, nombre: firstname, apellido: lastname})
 }
 
 export const signUpFirebase = async ({email, password, firstname, lastname}) => {
