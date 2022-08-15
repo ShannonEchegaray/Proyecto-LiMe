@@ -115,3 +115,10 @@ header > div > * {
 .categorias:hover > ul{
     display: block;
 }
+
+.numeroRe{
+    position: absolute;
+    bottom: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+}

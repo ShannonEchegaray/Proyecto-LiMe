@@ -9,7 +9,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 const Form = () => {
 
     const {getData, authId} = useContext(userContext)
-    const {item, items, fPrice} = useContext(cartContext)
+    const {item, items, fPrice, limpiar } = useContext(cartContext)
 
     const [formHandler, setFormHandler] = useState({firstname: "", lastname: "", email: ""})
     const [compra, setCompra] = useState(null)
@@ -27,6 +27,7 @@ const Form = () => {
         addPurchase({datosComprador: formHandler,
                     items: id ? item : items,
                     total: fPrice}).then(data => setCompra(data))
+        limpiar()
     }
 
   return (

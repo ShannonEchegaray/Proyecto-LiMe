@@ -21,6 +21,7 @@ _Esto se ha construido con las siguientes herramientas_
 * [TailWind] -
 * [MuiMaterial] -
 * [JavaScript] -
+* [Toastify] -
 
 ## Autores 
 

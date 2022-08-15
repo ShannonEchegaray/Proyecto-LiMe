@@ -1,10 +1,13 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { cartContext } from '../Containers/Cart/context/CartContext';
 import "./NavBar.css"
 import {BiCart, BiSearch} from "react-icons/bi"
 import { Link } from 'react-router-dom';
 import { GoLocation } from "react-icons/go";
 
 const NavBar = () => {
+
+    const {nop} = useContext(cartContext)
 
     const categories = [
         {categoria: "electronics"},
@@ -26,7 +29,8 @@ const NavBar = () => {
                 </button>
             </form>
             <h3 style={{fontSize: "0.95em"}}>Enviós gratis en 24 hs a partir de $4000</h3>
-            <div className="carroContenedor">
+            <div className="carroContenedor relative">
+                <p className='numeroRe'>{nop ? nop : null}</p>
                 <Link to="/cart">
                     <BiCart size={"20px"}/>
                 </Link>

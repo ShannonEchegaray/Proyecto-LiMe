@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, doc, getDoc, query, where, serverTimestamp, addDoc } from "firebase/firestore"
+import { getFirestore, collection, getDocs, doc, getDoc, query, where, serverTimestamp, addDoc, updateDoc } from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -49,12 +49,19 @@ export const addPurchase = async (objectCompra) => {
     const ventasCollection = collection(db, "ventas")
     const refVenta = await addDoc(ventasCollection, {...objectCompra, time: serverTimestamp()})
 
+    const document = await getDoc(doc(ventasCollection, refVenta.id))
+
+    document.data().items.forEach( async (el) => {
+        const documentoRef = doc(db, "items", el.id)
+        const documento = await getDoc(documentoRef)
+        const producto = documento.data()
+        updateDoc(documentoRef, {stock: producto.stock - el.qty})
+    })
     return refVenta.id
 } 
 
 const saveUserInDB = async (user, firstname, lastname) => {
     const usersCollection = collection(db, "users")
-    console.log(user)
     await addDoc(usersCollection, {id: user.uid, email: user.email, nombre: firstname, apellido: lastname})
 }
 
