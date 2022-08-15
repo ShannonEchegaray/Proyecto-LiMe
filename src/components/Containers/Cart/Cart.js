@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { cartContext } from './context/CartContext'
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+import { Route, Routes, Link } from 'react-router-dom'
 import "./Cart.css"
 import CartContainer from './CartContainer'
 import WishlistContainer from "./WishlistContainer"
@@ -10,8 +10,6 @@ const Cart = () => {
 
   const {nop, nos} = useContext(cartContext)
 
-  console.log(window.location.href)
-  window.location.href = "localhost:3000/"
   return (
   <div className="fondoMain">
     <div className="cartContainer">

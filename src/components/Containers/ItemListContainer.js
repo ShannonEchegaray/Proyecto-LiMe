@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from "react-router-dom"
-import {data}  from "../../api/productos"
 import { SpinnerCircular } from 'spinners-react';
 import ItemList from "../ItemList";
 import "./ItemListContainer.css"

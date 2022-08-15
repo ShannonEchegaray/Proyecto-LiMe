@@ -4,39 +4,43 @@ import {cartContext} from "../Cart/context/CartContext"
 import ItemCount from './ItemCount';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import StarHalfIcon from '@mui/icons-material/StarHalf';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import "./ItemDetail.css"
 
 
 const ItemDetail = ({item}) => {
 
-  const {addCart, buyIndividualItem} = useContext(cartContext)
+  const {addCart, buyIndividualItem, isInSavedCart, removeSavedCart, addSavedCart} = useContext(cartContext)
   const [redirect, setRedirect] = useState(null)
-
   
     const addProduct = (counter) => {
-        counter <= item.stock ? addCart({...item, qty: counter, status: "CARRITO"}) : console.log("no se banca el stock")
+        counter <= item.stock ? addCart({...item, qty: counter}) : console.log("no se banca el stock")
       }
 
     const buyItem = (counter) => {
       buyIndividualItem({...item, qty: counter})
-      setRedirect({...item, qty: counter})
+      setRedirect(item.id)
     }
 
   return (
     <div className='containerDetailItem'>
             <div className='containerDescriptionItem'>
-              <p className='newParagraph'>Nuevo | n comprados</p>
+              <div className='corazon' onClick={() => isInSavedCart(item.id) ? removeSavedCart(item.id) : addSavedCart(item)}>
+                <FavoriteIcon sx={ isInSavedCart(item.id) ? {color : "red"} : {color : "whitesmoke"} } />
+              </div>
+              <p className='newParagraph'>Nuevo | {item.rating.count} comprados</p>
               <p className='titleParagraph'>{item.title}</p>
               <div className='titleParagraph' style={{display: "flex", flexWrap: "nowrap", alignItems: "center"}}>
-                <StarIcon sx={{ fontSize: 18 }} color="primary"/>
-                <StarIcon sx={{ fontSize: 18 }} color="primary"/>
-                <StarIcon sx={{ fontSize: 18 }} color="primary"/>
-                <StarIcon sx={{ fontSize: 18 }} color="primary"/>
-                <StarIcon sx={{ fontSize: 18 }} color="primary"/>
                 <span style={{fontSize:"18px", verticalAlign: "middle"}}>(n)</span>
               </div>
+              {Array.from(Array(5), (v, index) => {
+                  if(index + 1 < item.rating.rate){
+                    return <StarIcon key={index} sx={{ fontSize: 18 }} color="primary"/>
+                  } else {
+                    return <StarBorderIcon key={index} sx={{ fontSize: 18 }} />
+                  }
+                })}
               <div>
                 <p className='priceParagraph'>$ {item.price}</p>
                 <p>en 12 x ${item.price / 12}</p>
@@ -57,7 +61,7 @@ const ItemDetail = ({item}) => {
                 </div>
                 <div style={{paddingTop: "20px"}}>
                   <ItemCount addProducto={addProduct} buyItem={buyItem} stock={item.stock} initial={1}/>
-                  {redirect && <Navigate to={`/form/${redirect.id}`}/>}
+                  {redirect && <Navigate to={`/form/${redirect}`}/>}
                 </div>
               </div>
             </div>

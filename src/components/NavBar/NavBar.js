@@ -14,10 +14,10 @@ const NavBar = () => {
     ]
 
   return (
-    <header id="pepe">
+    <header id="header">
         <div>
             <Link to="/">
-                <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.19.0/mercadolibre/logo__large_plus.png" alt="" />
+                <img src="https://i.imgur.com/ohCDrgI.png" alt="" />
             </Link>
             <form action="" className='formularioBuscador'>
                 <input type="text" className="inputBuscador" placeholder='Buscar productos, marcas y mas...'/>
@@ -25,9 +25,7 @@ const NavBar = () => {
                     <div className="iconoBuscador"><BiSearch size={"16px"}/></div>
                 </button>
             </form>
-            <a href="">
-                <h3 style={{fontSize: "0.95em"}}>Enviós gratis en 24 hs a partir de $4000</h3>
-            </a>
+            <h3 style={{fontSize: "0.95em"}}>Enviós gratis en 24 hs a partir de $4000</h3>
             <div className="carroContenedor">
                 <Link to="/cart">
                     <BiCart size={"20px"}/>
@@ -44,15 +42,15 @@ const NavBar = () => {
                     <li>Ofertas</li>
                     <li className='categorias'>Categorias
                         <ul className='bg-black rounded overflow-hidden m-0 p-0'>
-                        {categories.map(el => <li className='bg-gray-800 px-2 py-1.5 hover:bg-gray-500'><Link className='text-white' to={`/${el.categoria}`}>{el.categoria}</Link></li>)}
+                        {categories.map((el, index) => <li key={index} className='bg-gray-800 px-2 py-1.5 hover:bg-gray-500'><Link className='text-white' to={`/${el.categoria}`}>{el.categoria}</Link></li>)}
                         </ul>
                     </li>
                 </ul>
 
                 <ul className='listah'>
-                    <li>Creá tu cuenta</li>
-                    <li>Ingresá</li>
-                    <li>Mis Compras</li>
+                    <li><Link to="/signUp">Creá tu cuenta</Link></li>
+                    <li><Link to="/signIn">Ingresá</Link></li>
+                    <li><Link to="/purchases">Mis Compras</Link></li>
                 </ul>
             </nav>
         </div>

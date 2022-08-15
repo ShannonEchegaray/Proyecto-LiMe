@@ -32,8 +32,9 @@ const ItemCount = ({stock, initial, addProducto, buyItem}) => {
             <button className='quantityButton' onClick={() => setBoton(!boton)}>Cantidad: <span className="font-medium">{selection || initial} {selection > 1 ? "unidades" : "unidad"}</span></button>
             <ul style={{ display: boton ? "block" : "none"}} className="listaCantidades absolute top-100">
                 {Array.from(Array(stock), (v, index) => {
+                    //La cantidad de productos a comprar siempre se representara hasta 6, de 7 para arriba se elige escribiendo el numero, de 8 para arriba no se representan
                     if (index + 1 < 7) {
-                        return <li key={index} className={`itemList ${(selection == index + 1) && !boton2 && "border-l-2 border-solid border-blue-400"}`} onClick={() => select(index + 1)}>{index + 1} {index + 1 == 1 ? "unidad" : "unidades"}</li>
+                        return <li key={index} className={`itemList ${(selection === index + 1) && !boton2 && "border-l-2 border-solid border-blue-400"}`} onClick={() => select(index + 1)}>{index + 1} {index + 1 === 1 ? "unidad" : "unidades"}</li>
                     } else if(index + 1 >= 8){
                         return null
                     } else {
@@ -50,7 +51,7 @@ const ItemCount = ({stock, initial, addProducto, buyItem}) => {
                                 {error && <p className='text-xs text-red-800'>*La cantidad no puede superar el stock</p>}
                                 
                                 </form> )
-                            : <button className='itemList text-left' disabled={input.length == 0 ? false : true} onClick={(e) => {newButton(e)}}>Comprar mas de {index} unidades</button>}</li>
+                            : <button className='itemList text-left' disabled={input.length === 0 ? false : true} onClick={(e) => {newButton(e)}}>Comprar mas de {index} unidades</button>}</li>
                     }
                 })}
             </ul>

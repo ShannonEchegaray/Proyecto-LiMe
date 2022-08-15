@@ -6,7 +6,8 @@ const {Provider} = cartContext
 const CartContext = ({children}) => {
 
   const [item, setItem] = useState({})
-  const [items, setItems] = useState([])
+  const [savedItems, setSavedItems] = useState(JSON.parse(localStorage.getItem("savedItems")) || [])
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem("items")) || [])
   const [fPrice, setFPrice] = useState(0)
   const [nop, setNop] = useState(0)
   const [nos, setNos] = useState(0)
@@ -14,20 +15,43 @@ const CartContext = ({children}) => {
   useEffect(() => {
     setFPrice(calcularTotal())
     setNop(articulosObtenidos())
-    setNos(articulosGuardados())
+    localStorage.setItem("items", JSON.stringify(items))
   }, [items])
 
+  useEffect(() => {
+    setNos(articulosGuardados())
+    localStorage.setItem("savedItems", JSON.stringify(savedItems))
+  }, [savedItems])
+
+  //Wishlist Function's
+
+  const addSavedCart = (item) => {
+    if(estaEnLista(item.id, savedItems)){
+      return
+    }
+    setSavedItems([...savedItems, item])
+  }
+  
+  const removeSavedCart = (id) => {
+    setSavedItems(savedItems.filter(el => el.id !== id))
+  }
+
+  const isInSavedCart = (id) => {
+    return savedItems.some(el => el.id === id)
+  }
+
+  //Cart Function's
+  
   const buyIndividualItem = (item) => {
     setItem(item)
   }
-  
+
   const addCart = (item) => {
     let {id, qty, stock} = item;
     if(estaEnLista(id)){
       let cart = [...items]
       let cartItem = cart.find(el => el.id === id);
       cartItem.qty += qty;
-      cartItem.status = "CARRITO"
       cart[cart.indexOf(cartItem)] = cartItem;
       cartItem.qty <= stock? setItems(cart): console.log("La cantidad ingresada supera el stock")
     } else {
@@ -44,41 +68,35 @@ const CartContext = ({children}) => {
   }
 
   const removerItem = (itemId) => {
-    setItems(items.filter(el => el.id != itemId))
+    setItems(items.filter(el => el.id !== itemId))
   }
 
   const limpiar = () => {
     setItems([])
-  }
-
-  const changeStatus = (id) => {
-    let cart = [...items]
-    let cartItem = cart.find(el => el.id === id);
-    cartItem.status = cartItem.status === "CARRITO" ? "GUARDADOS" : "CARRITO"
-    cartItem.qty = cartItem.status === "GUARDADOS" && 0;
-    cart[cart.indexOf(cartItem)] = cartItem;
-    setItems(cart)
+    localStorage.removeItem("items")
   }
 
   // Funciones internas
   const calcularTotal = () => {
-    return items.reduce((acc, el) => el.status === "CARRITO" ? acc + el.qty * el.price : acc, 0)
+    return items.reduce((acc, el) => acc + el.qty * el.price, 0)
   }
 
   const articulosObtenidos = () => {
-    return items.reduce((acc, el) => el.status === "CARRITO" ? acc + el.qty : acc, 0);
+    return items.reduce((acc, el) => acc + el.qty, 0);
   }
 
   const articulosGuardados = () => {
-    return items.reduce((acc, el) => el.status === "GUARDADOS" ? acc + 1 : acc, 0);
+    return savedItems.length;
   }
 
   const estaEnLista = (id) => {
-    return items.some(el => el.id == id)
+    return items.some(el => el.id === id)
   }
 
   const values = {
+    item,
     items,
+    savedItems,
     fPrice,
     nop,
     nos,  
@@ -86,8 +104,10 @@ const CartContext = ({children}) => {
     setQty,
     removerItem,
     limpiar,
-    changeStatus,
-    buyIndividualItem
+    buyIndividualItem,
+    isInSavedCart,
+    addSavedCart,
+    removeSavedCart
   }
 
   return (

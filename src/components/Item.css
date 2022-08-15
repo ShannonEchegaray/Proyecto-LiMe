@@ -7,6 +7,7 @@
     align-items: center;
     outline: 1px solid #80808038;
     height: 12em;
+    position: relative;
 }
 
 .itemImage{
@@ -28,4 +29,10 @@
     object-fit: scale-down;
     object-position: center center;
     
+}
+
+.corazon{
+    position: absolute;
+    top: 0.5em;
+    right: 1em;
 }

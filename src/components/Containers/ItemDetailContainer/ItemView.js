@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./ItemView.css"
 
 const ItemView = ({item}) => {
-
-    const [mouseCoords, setMouseCoords] = useState({})
 
   return (
     <div className='containerItem'>

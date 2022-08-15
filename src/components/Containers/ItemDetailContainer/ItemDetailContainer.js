@@ -4,7 +4,6 @@ import "./ItemDetailContainer.css"
 import ItemDetail from "./ItemDetail"
 import { SpinnerCircular } from 'spinners-react';
 import ItemView from './ItemView'
-import {data} from "../../../api/productos"
 import {getItem} from "../../../api/firebase"
 
 const ItemDetailContainer = () => {
@@ -15,13 +14,15 @@ const ItemDetailContainer = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => {
-
+    const asyncFunction = async () => {
       setLoading(true);
-      getItem(id).then(el => setProduct(el));
+      const result = await getItem(id)
+      setProduct(result)
       setLoading(false);
-    }, 2000)  
-  }, [])
+    }
+      
+    asyncFunction()
+  }, [id])
   
   return (
       <div className="fondoMain">
@@ -31,7 +32,7 @@ const ItemDetailContainer = () => {
           : (
             <div className="cardItem">
               <ItemView item={product}/>
-              <ItemDetail item={product}/>
+              <ItemDetail item={product} itemRating={product.rating}/>
             </div>
           )
         }

@@ -1,15 +1,10 @@
 import React, { useContext } from 'react'
-import {Link} from "react-router-dom"
-import CartCounter from "./CartCounter"
 import { cartContext } from './context/CartContext'
+import {Link} from "react-router-dom"
 
 const CartItem = ({item}) => {
 
-    const {setQty, removerItem, addSavedCart} = useContext(cartContext)
-
-    const addProduct = (counter) => {
-        setQty(item.id, counter)
-    }
+    const {removerItem} = useContext(cartContext)
 
   return (
     <div className='border-y border-grey border-solid'>
@@ -24,11 +19,10 @@ const CartItem = ({item}) => {
                     <Link to={`/category/${item.id}`}>
                         <p className='text-start'>{item.title}</p>
                     </Link>
-                    <p className='text-start'>Envio Gratis</p>
+                    <p className='text-start'>{item.status === "CARRITO" && "Envio Gratis"}</p>
                 </div>
-                <CartCounter stock={item.stock} initial={item.qty} addProduct={addProduct}/>
                 <div className='flex-grow'>
-                    $ {item.price * item.qty}
+                    $ {item.price}
                 </div>
             </div>
         </div>
@@ -36,11 +30,6 @@ const CartItem = ({item}) => {
             <ul className='flex'>
                 <li className="mx-2">
                     <button onClick={() => removerItem(item.id)} className="link">Eliminar</button> 
-                </li>
-                <li className="mx-2">
-                    <button onClick={() => {
-                        addSavedCart(item)
-                        removerItem(item.id)}} className="link">Guardar para despues</button> 
                 </li>
             </ul>
         </div>
