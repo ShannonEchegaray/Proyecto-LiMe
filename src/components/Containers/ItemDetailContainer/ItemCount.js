@@ -8,8 +8,6 @@ const ItemCount = ({stock, initial, addProducto, buyItem}) => {
     const [boton2, setBoton2] = useState(false)
     const [error, setError] = useState(false)
 
-    console.log(error)
-
     const select = (number) => {
         if(number > stock){
             setError(true)
