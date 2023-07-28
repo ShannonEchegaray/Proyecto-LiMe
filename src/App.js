@@ -1,5 +1,5 @@
 import ItemListContainer from "./pages/item-list/item-list";
-import NavBar from "./components/navbar/navbar";
+import NavBar from "./components/nav-bar/nav-bar";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Cart from "./pages/cart/cart";
 import "./App.css";
