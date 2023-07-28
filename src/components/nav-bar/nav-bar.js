@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { cartContext } from "../cart/context/cart-context";
-import "./navbar.css";
+import "./nav-bar.css";
 import { BiCart, BiSearch } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { GoLocation } from "react-icons/go";
