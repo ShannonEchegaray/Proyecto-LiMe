@@ -18,7 +18,7 @@ __
 _Esto se ha construido con las siguientes herramientas_
 
 * [React] - 
-* [TailWind] -
+* [Tailwind CSS] -
 * [MuiMaterial] -
 * [JavaScript] -
 * [Toastify] -

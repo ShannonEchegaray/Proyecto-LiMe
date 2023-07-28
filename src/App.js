@@ -1,17 +1,16 @@
-import ItemListContainer from './components/Containers/ItemListContainer';
-import NavBar from './components/NavBar/NavBar';
-import {Routes, Route, BrowserRouter} from "react-router-dom"
-import Cart from './components/Containers/Cart/Cart';
-import './App.css';
-import ItemDetailContainer from './components/Containers/ItemDetailContainer/ItemDetailContainer';
-import CartContext from './components/Containers/Cart/context/CartContext';
-import UserContext from './components/UserContext/UserContext';
-import Form from "./components/Form/Form"
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
+import ItemListContainer from "./pages/item-list/item-list";
+import NavBar from "./components/navbar/navbar";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Cart from "./pages/cart/cart";
+import "./App.css";
+import ItemDetailContainer from "./pages/item-detail/item-detail";
+import CartContext from "./components/cart/context/cart-context";
+import UserContext from "./components/context/user-context";
+import Form from "./components/form/purchase-form";
+import SignUp from "./pages/sign-up/sign-up";
+import SignIn from "./pages/sign-in/sign-in";
 
 function App() {
-
   return (
     <div className="App">
       <UserContext>
@@ -19,14 +18,14 @@ function App() {
           <BrowserRouter>
             <NavBar />
             <Routes>
-              <Route path='/' element={<ItemListContainer />} />
-              <Route path='/:category' element={<ItemListContainer />} />   
-              <Route path='/category/:id' element={<ItemDetailContainer />} />
-              <Route path='/cart/*' element={<Cart />} />
-              <Route path="/form" element={<Form />}/>
-              <Route path="/form/:id" element={<Form />}/>
-              <Route path="/signUp" element={<SignUp />}/>
-              <Route path="/signIn" element={<SignIn />}/>
+              <Route path="/" element={<ItemListContainer />} />
+              <Route path="/:category" element={<ItemListContainer />} />
+              <Route path="/category/:id" element={<ItemDetailContainer />} />
+              <Route path="/cart/*" element={<Cart />} />
+              <Route path="/form" element={<Form />} />
+              <Route path="/form/:id" element={<Form />} />
+              <Route path="/signUp" element={<SignUp />} />
+              <Route path="/signIn" element={<SignIn />} />
             </Routes>
           </BrowserRouter>
         </CartContext>
@@ -36,4 +35,3 @@ function App() {
 }
 
 export default App;
-
